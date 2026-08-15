@@ -69,3 +69,19 @@
                           ▼
 
                 frontend_result.json
+
+
+
+실행 시
+
+파일 검증
+    ↓
+Stage1
+    ↓
+openai_file_result.json
+    ↓
+Stage2
+    ↓
+todo_result.json
+    ↓
+frontend_result.json
