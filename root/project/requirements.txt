@@ -1,0 +1,13 @@
+openai
+pytz
+babel
+pypdf
+python-docx
+fastapi
+uvicorn[standard]
+python-multipart
+sqlalchemy
+psycopg2-binary
+pyjwt
+bcrypt
+pydantic[email]

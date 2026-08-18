@@ -1,3 +1,4 @@
+import os
 import re
 import json
 
@@ -51,16 +52,6 @@ class OpenAITodoExtractor:
         self.final_path = (
             self.base_path
             / "frontend_result.json"
-        )
-
-        # =====================================================
-        # API KEY
-        #
-        # 같은 폴더의 api_key.txt 사용
-        # =====================================================
-        self.api_key_path = (
-            self.base_path
-            / "api_key.txt"
         )
 
         # =====================================================
@@ -154,37 +145,19 @@ To-Do가 아닙니다.
     # ---------------------------------------------------------
     def load_api_key(self):
 
-        if not self.api_key_path.is_file():
-
-            raise FileNotFoundError(
-                "\n[ERROR] API Key 파일이 존재하지 않습니다.\n"
-                f"경로: {self.api_key_path}\n"
-                "api_key.txt 파일을 생성하세요."
-            )
-
-        with open(
-            self.api_key_path,
-            "r",
-            encoding="utf-8"
-        ) as f:
-
-            api_key = (
-                f.read()
-                .strip()
-            )
+        api_key = os.environ.get("OPENAI_API_KEY")
 
         if not api_key:
 
             raise ValueError(
-                "[ERROR] api_key.txt 파일이 비어 있습니다."
+                "[ERROR] OPENAI_API_KEY 환경변수가 설정되어 있지 않습니다."
             )
 
         print(
-            "[INFO] API Key 파일 불러오기 성공: "
-            f"{self.api_key_path}"
+            "[INFO] OPENAI_API_KEY 환경변수에서 API Key를 불러왔습니다."
         )
 
-        return api_key
+        return api_key.strip()
 
     # ---------------------------------------------------------
     # 기존 2단계 결과 삭제
